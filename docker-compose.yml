@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  expo:
+    build: ./prod_hub_fe
+    ports:
+      - '19006:19006'
+    volumes:
+      - ./prod_hub_fe:/usr/src/app
+    environment:
+      - EXPO_WEB_PORT=19006
