@@ -3,16 +3,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { StyleSheet, Text, View } from 'react-native';
+import PomodoroTimer from './components/PomodoroTimer';
 
 const Drawer = createDrawerNavigator();
-
-function PomodoroTimer() {
-  return (
-    <View style={styles.container}>
-      <Text>Pomodoro Timer</Text>
-    </View>
-  );
-}
 
 function Matrix() {
   return (
