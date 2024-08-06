@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 200,
+    height: 200,
     marginRight: 10,
   },
   textContainer: {
@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   description: {
-    fontSize: 24,
+    fontSize: 18,
   },
   sectionTitle: {
     width: '100%',

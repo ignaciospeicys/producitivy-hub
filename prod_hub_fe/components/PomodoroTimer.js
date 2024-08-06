@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
-import { Text, View, Image, Button, ScrollView } from 'react-native';
+import { SafeAreaView, Text, View, Image, Button, ScrollView } from 'react-native';
 import texts from '../assets/texts';
 import styles from '../styles/PomodorTimerStyle';
+import Timer from './Timer'
 
 const PomodoroTimer = () => {
   const [tasks, setTasks] = useState([]);
+  const [timerState, setTimerState] = useState({});
 
-  const handleButtonPress = () => {
+  const handleTimeUpdate = (newTime) => {
+    setTimerState((prevState) => ({ ...prevState, currentTime: newTime }));
+  };
+
+  const handleTimerEnd = () => {
     setTasks([...tasks, { id: tasks.length, title: 'Title', description: 'description text' }]);
+    setTimerState((prevState) => ({ ...prevState, hasEnded: true }));
   };
 
   return (
@@ -20,7 +27,13 @@ const PomodoroTimer = () => {
         <View style={styles.textContainer}>
           <Text style={styles.title}>{texts.pomodoroTimer.title}</Text>
           <Text style={styles.description}>{texts.pomodoroTimer.description}</Text>
-          <Button title="Start" onPress={handleButtonPress} />
+          <SafeAreaView style={styles.container}>
+            <Timer style={styles.timer}
+              initialSeconds={3}
+              onTimeUpdate={handleTimeUpdate}
+              onTimerEnd={handleTimerEnd}
+            />
+          </SafeAreaView>
         </View>
       </View>
 
