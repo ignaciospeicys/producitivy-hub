@@ -1,20 +1,39 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, View, Image, Button, ScrollView } from 'react-native';
+import { SafeAreaView, Text, View, Image, ScrollView } from 'react-native';
 import texts from '../assets/texts';
 import styles from '../styles/PomodorTimerStyle';
-import Timer from './Timer'
+import Timer from './Timer';
+import TaskForm from './TaskForm';
 
 const PomodoroTimer = () => {
   const [tasks, setTasks] = useState([]);
-  const [timerState, setTimerState] = useState({});
+  const [timerState, setTimerState] = useState(null); // Manage timer visibility and state
+  const [taskFormData, setTaskFormData] = useState({
+    title: 'Title',
+    description: 'description text',
+    time: '00:00',
+  });
 
   const handleTimeUpdate = (newTime) => {
     setTimerState((prevState) => ({ ...prevState, currentTime: newTime }));
   };
 
   const handleTimerEnd = () => {
-    setTasks([...tasks, { id: tasks.length, title: 'Title', description: 'description text' }]);
-    setTimerState((prevState) => ({ ...prevState, hasEnded: true }));
+    setTasks([...tasks, { id: tasks.length, title: taskFormData.title, description: taskFormData.description }]);
+    setTimerState(null);
+  };
+
+  const handleStartTask = () => {
+    const [mins, secs] = taskFormData.time.split(':').map(Number);
+    const initialSeconds = mins * 60 + secs;
+    setTimerState({ initialSeconds, isRunning: true }); // Start the timer
+  };
+
+  const handleFormChange = (field, value) => {
+    setTaskFormData((prevState) => ({
+      ...prevState,
+      [field]: value,
+    }));
   };
 
   return (
@@ -27,15 +46,28 @@ const PomodoroTimer = () => {
         <View style={styles.textContainer}>
           <Text style={styles.title}>{texts.pomodoroTimer.title}</Text>
           <Text style={styles.description}>{texts.pomodoroTimer.description}</Text>
-          <SafeAreaView style={styles.container}>
-            <Timer style={styles.timer}
-              initialSeconds={3}
-              onTimeUpdate={handleTimeUpdate}
-              onTimerEnd={handleTimerEnd}
-            />
-          </SafeAreaView>
         </View>
       </View>
+
+      <SafeAreaView>
+        {timerState ? (
+          <Timer
+            style={styles.timer}
+            initialSeconds={timerState.initialSeconds}
+            isRunning={timerState.isRunning} // Pass the isRunning state
+            onTimeUpdate={handleTimeUpdate}
+            onTimerEnd={handleTimerEnd}
+          />
+        ) : (
+          <TaskForm
+            title={taskFormData.title}
+            description={taskFormData.description}
+            time={taskFormData.time}
+            onFormChange={handleFormChange}
+            onStartTask={handleStartTask}
+          />
+        )}
+      </SafeAreaView>
 
       <Text style={styles.sectionTitle}>Section title</Text>
 
@@ -53,7 +85,6 @@ const PomodoroTimer = () => {
       ))}
     </ScrollView>
   );
-}
-
+};
 
 export default PomodoroTimer;

@@ -1,14 +1,15 @@
-// Timer.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import styles from '../styles/TimerStyle';
 
-const Timer = ({ initialSeconds, onTimeUpdate, onTimerEnd }) => {
+
+const Timer = ({ initialSeconds, isRunning, onTimeUpdate, onTimerEnd }) => {
   const [time, setTime] = useState(initialSeconds);
-  const [isRunning, setIsRunning] = useState(false);
+  const [running, setRunning] = useState(isRunning);
 
   useEffect(() => {
     let timer;
-    if (isRunning) {
+    if (running) {
       timer = setInterval(() => {
         setTime((prevTime) => {
           if (prevTime > 0) {
@@ -17,7 +18,7 @@ const Timer = ({ initialSeconds, onTimeUpdate, onTimerEnd }) => {
             return newTime;
           } else {
             clearInterval(timer);
-            setIsRunning(false);
+            setRunning(false);
             onTimerEnd();
             return 0;
           }
@@ -26,12 +27,16 @@ const Timer = ({ initialSeconds, onTimeUpdate, onTimerEnd }) => {
     }
 
     return () => clearInterval(timer);
-  }, [isRunning]);
+  }, [running]);
 
-  const startTimer = () => setIsRunning(true);
-  const pauseTimer = () => setIsRunning(false);
+  useEffect(() => {
+    setTime(initialSeconds);
+    setRunning(isRunning);
+  }, [initialSeconds, isRunning]);
+
+  const pauseTimer = () => setRunning(false);
   const resetTimer = () => {
-    setIsRunning(false);
+    setRunning(false);
     setTime(initialSeconds);
     onTimeUpdate(initialSeconds);
   };
@@ -46,30 +51,15 @@ const Timer = ({ initialSeconds, onTimeUpdate, onTimerEnd }) => {
     <View style={styles.container}>
       <Text style={styles.timerText}>{formatTime(time)}</Text>
       <View style={styles.buttonContainer}>
-        <Button title="Start" onPress={startTimer} />
-        <Button title="Pause" onPress={pauseTimer} />
+        {running ? (
+          <Button title="Pause" onPress={pauseTimer} />
+        ) : (
+          <Button title="Start" onPress={() => setRunning(true)} />
+        )}
         <Button title="Reset" onPress={resetTimer} />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
-  },
-  timerText: {
-    fontSize: 48,
-    fontWeight: 'bold',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginTop: 20,
-    justifyContent: 'space-between',
-    width: '60%',
-  },
-});
 
 export default Timer;
