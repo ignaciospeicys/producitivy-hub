@@ -11,11 +11,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
+    position: 'relative',
   },
   image: {
     width: 200,
     height: 200,
     marginRight: 10,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: 'transparent',
+    padding: 5,
+  },
+  closeButtonText: {
+    fontSize: 18,
+    color: 'black',
   },
   textContainer: {
     flex: 1,

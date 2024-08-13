@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, View, Image, ScrollView } from 'react-native';
+import { SafeAreaView, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import texts from '../assets/texts';
 import styles from '../styles/PomodorTimerStyle';
 import Timer from './Timer';
@@ -7,12 +7,13 @@ import TaskForm from './TaskForm';
 
 const PomodoroTimer = () => {
   const [tasks, setTasks] = useState([]);
-  const [timerState, setTimerState] = useState(null); // Manage timer visibility and state
+  const [timerState, setTimerState] = useState(null);
   const [taskFormData, setTaskFormData] = useState({
     title: 'Title',
     description: 'description text',
     time: '00:00',
   });
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
   const handleTimeUpdate = (newTime) => {
     setTimerState((prevState) => ({ ...prevState, currentTime: newTime }));
@@ -26,7 +27,7 @@ const PomodoroTimer = () => {
   const handleStartTask = () => {
     const [mins, secs] = taskFormData.time.split(':').map(Number);
     const initialSeconds = mins * 60 + secs;
-    setTimerState({ initialSeconds, isRunning: true }); // Start the timer
+    setTimerState({ initialSeconds, isRunning: true });
   };
 
   const handleFormChange = (field, value) => {
@@ -38,23 +39,31 @@ const PomodoroTimer = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <Image
-          source={require('../img/pomodoro.png')}
-          style={styles.image}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>{texts.pomodoroTimer.title}</Text>
-          <Text style={styles.description}>{texts.pomodoroTimer.description}</Text>
+      {isHeaderVisible && (
+        <View style={styles.header}>
+          <Image
+            source={require('../img/pomodoro.png')}
+            style={styles.image}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{texts.pomodoroTimer.title}</Text>
+            <Text style={styles.description}>{texts.pomodoroTimer.description}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => setIsHeaderVisible(false)}
+          >
+            <Text style={styles.closeButtonText}>✕</Text>
+          </TouchableOpacity>
         </View>
-      </View>
+      )}
 
       <SafeAreaView>
         {timerState ? (
           <Timer
             style={styles.timer}
             initialSeconds={timerState.initialSeconds}
-            isRunning={timerState.isRunning} // Pass the isRunning state
+            isRunning={timerState.isRunning}
             onTimeUpdate={handleTimeUpdate}
             onTimerEnd={handleTimerEnd}
           />
