@@ -9,9 +9,9 @@ const PomodoroTimer = () => {
   const [tasks, setTasks] = useState([]);
   const [timerState, setTimerState] = useState(null);
   const [taskFormData, setTaskFormData] = useState({
-    title: 'Title',
-    description: 'description text',
-    time: '00:00',
+    title: 'Task Title',
+    description: 'Task Description',
+    time: '00:03',
   });
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 

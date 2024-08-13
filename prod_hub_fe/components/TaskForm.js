@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Button, TextInput } from 'react-native';
-
+import styles from '../styles/TaskFormStyle';
 const TaskForm = ({ title, description, time, onFormChange, onStartTask }) => {
   const handleTimeChange = (input) => {
     const formattedInput = input.replace(/[^0-9:]/g, '');
@@ -11,24 +11,30 @@ const TaskForm = ({ title, description, time, onFormChange, onStartTask }) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <View style={styles.titleDescriptionContainer}>
+        <TextInput
+          style={styles.titleInput}
+          value={title}
+          onChangeText={(text) => onFormChange('title', text)}
+        />
+        <TextInput
+          style={styles.descriptionInput}
+          value={description}
+          onChangeText={(text) => onFormChange('description', text)}
+        />
+      </View>
+
       <TextInput
-        placeholder="Task Title"
-        value={title}
-        onChangeText={(text) => onFormChange('title', text)}
-      />
-      <TextInput
-        placeholder="Task Description"
-        value={description}
-        onChangeText={(text) => onFormChange('description', text)}
-      />
-      <TextInput
-        placeholder="MM:SS"
+        style={styles.timeInput}
         value={time}
         onChangeText={handleTimeChange}
         keyboardType="numeric"
       />
-      <Button title="Start Task" onPress={onStartTask} />
+
+      <View style={styles.buttonContainer}>
+        <Button title="Start" onPress={onStartTask} />
+      </View>
     </View>
   );
 };
