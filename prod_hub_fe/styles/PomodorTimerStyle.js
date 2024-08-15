@@ -11,23 +11,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
+    position: 'relative',
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 200,
+    height: 200,
     marginRight: 10,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: 'transparent',
+    padding: 5,
+  },
+  closeButtonText: {
+    fontSize: 18,
+    color: 'black',
   },
   textContainer: {
     flex: 1,
     justifyContent: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   description: {
-    fontSize: 24,
+    fontSize: 18,
   },
   sectionTitle: {
     width: '100%',
