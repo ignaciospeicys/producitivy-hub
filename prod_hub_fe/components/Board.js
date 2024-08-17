@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import styles from '../styles/BoardStyle';
 
 const ItemType = 'TASK';
 
@@ -88,38 +89,5 @@ const Board = () => {
     </DndProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    padding: 10,
-    justifyContent: 'space-between',
-  },
-  column: {
-    flex: 1,
-    marginHorizontal: 5,
-    backgroundColor: '#f4f4f4',
-    padding: 10,
-    borderRadius: 5,
-  },
-  columnTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  taskItem: {
-    padding: 15,
-    borderRadius: 5,
-    marginBottom: 10,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  taskText: {
-    fontSize: 16,
-  },
-});
 
 export default Board;
