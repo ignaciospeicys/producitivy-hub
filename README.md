@@ -1,6 +1,10 @@
-# producitivy-hub
+# Getting Started with productivity-hub
 
-run `docker-compose up --build`
+### Run the app
 
-visit `http://localhost:19006/`
- 
+```
+npm start
+```
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
