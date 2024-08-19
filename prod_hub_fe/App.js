@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { StyleSheet, Text, View } from 'react-native';
 import PomodoroTimer from './components/PomodoroTimer';
+import Board from './components/Board';
 
 const Drawer = createDrawerNavigator();
 
@@ -11,14 +12,6 @@ function Matrix() {
   return (
     <View style={styles.container}>
       <Text>Matrix</Text>
-    </View>
-  );
-}
-
-function BoardView() {
-  return (
-    <View style={styles.container}>
-      <Text>BoardView</Text>
     </View>
   );
 }
@@ -52,8 +45,8 @@ export default function App() {
         }}
       >
         <Drawer.Screen name="Pomodoro Timer" component={PomodoroTimer} />
+        <Drawer.Screen name="Board" component={Board} />
         <Drawer.Screen name="Matrix" component={Matrix} />
-        <Drawer.Screen name="Board View" component={BoardView} />
         <Drawer.Screen name="Theory" component={Theory} />
       </Drawer.Navigator>
     </NavigationContainer>
