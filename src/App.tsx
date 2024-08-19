@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemText, Button, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  CssBaseline,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import './App.css';
 import Pomodoro from './components/Pomodoro';
@@ -15,11 +28,10 @@ const App: React.FC = () => {
     setSidebarVisible(!sidebarVisible);
   };
 
-  // Create a light theme
   const theme = createTheme({
     palette: {
       mode: 'light',
-    },
+    }
   });
 
   return (
@@ -44,7 +56,7 @@ const App: React.FC = () => {
           </AppBar>
           <Drawer variant="persistent" open={sidebarVisible}>
             <div className="App-sidebar">
-              <Button onClick={toggleSidebar} className="toggle-button">
+              <Button onClick={toggleSidebar} className="toggle-button" variant="contained" color="primary">
                 {sidebarVisible ? 'Hide Sidebar' : 'Show Sidebar'}
               </Button>
               <List>
