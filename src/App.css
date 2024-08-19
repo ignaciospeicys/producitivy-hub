@@ -1,0 +1,17 @@
+.App-sidebar {
+    width: 60px; /* Default collapsed width */
+    transition: width 0.3s ease;
+}
+
+.App-sidebar-open {
+    width: 240px; /* Width when the sidebar is open */
+}
+
+.App-sidebar-paper {
+    width: inherit; /* Make the paper inherit the width of the drawer */
+    transition: width 0.3s ease;
+}
+
+.App-sidebar-paper-open {
+    width: inherit;
+}

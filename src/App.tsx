@@ -9,17 +9,20 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button,
   CssBaseline,
   ThemeProvider,
   createTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import HomeIcon from '@mui/icons-material/Home';
 import './App.css';
 import Pomodoro from './components/Pomodoro';
 import Matrix from './components/Matrix';
 import Stats from './components/Stats';
 import Welcome from './components/Welcome';
+import clsx from 'clsx';
 
 const App: React.FC = () => {
   const [sidebarVisible, setSidebarVisible] = useState(true);
@@ -54,26 +57,30 @@ const App: React.FC = () => {
               </Typography>
             </Toolbar>
           </AppBar>
-          <Drawer variant="persistent" open={sidebarVisible}>
-            <div className="App-sidebar">
-              <Button onClick={toggleSidebar} className="toggle-button" variant="contained" color="primary">
-                {sidebarVisible ? 'Hide Sidebar' : 'Show Sidebar'}
-              </Button>
-              <List>
-                <ListItem button component={Link} to="/">
-                  <ListItemText primary="Home" />
-                </ListItem>
-                <ListItem button component={Link} to="/pomodoro">
-                  <ListItemText primary="Pomodoro" />
-                </ListItem>
-                <ListItem button component={Link} to="/matrix">
-                  <ListItemText primary="Matrix" />
-                </ListItem>
-                <ListItem button component={Link} to="/stats">
-                  <ListItemText primary="Stats" />
-                </ListItem>
-              </List>
-            </div>
+          <Drawer
+            variant="permanent"
+            className={clsx('App-sidebar', { 'App-sidebar-open': sidebarVisible })}
+            classes={{
+              paper: clsx('App-sidebar-paper', { 'App-sidebar-paper-open': sidebarVisible }),
+            }}
+          >
+            <IconButton onClick={toggleSidebar} className="toggle-button" color="primary">
+              {sidebarVisible ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+            </IconButton>
+            <List>
+              <ListItem button component={Link} to="/">
+                <HomeIcon />
+              </ListItem>
+              <ListItem button component={Link} to="/pomodoro">
+                <ListItemText primary={sidebarVisible ? "Pomodoro" : "P"} />
+              </ListItem>
+              <ListItem button component={Link} to="/matrix">
+                <ListItemText primary={sidebarVisible ? "Matrix" : "M"} />
+              </ListItem>
+              <ListItem button component={Link} to="/stats">
+                <ListItemText primary={sidebarVisible ? "Stats" : "S"} />
+              </ListItem>
+            </List>
           </Drawer>
           <main className="App-content">
             <Routes>
