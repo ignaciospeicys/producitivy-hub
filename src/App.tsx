@@ -11,7 +11,7 @@ import {
   ListItemText,
   CssBaseline,
   ThemeProvider,
-  createTheme,
+  createTheme, ListItemButton,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -42,7 +42,16 @@ const App: React.FC = () => {
       <CssBaseline />
       <Router>
         <div className="App">
-          <AppBar position="static">
+          <AppBar
+            position="static"
+            sx={{
+              width: sidebarVisible ? `calc(100% - 240px)` : `calc(100% - 60px)`,
+              marginLeft: sidebarVisible ? `240px` : `60px`,
+              transition: 'width 0.3s ease, margin-left 0.3s ease',
+              bgcolor: '#fff2f2',
+              color: 'black'
+            }}
+          >
             <Toolbar>
               <IconButton
                 edge="start"
@@ -68,18 +77,18 @@ const App: React.FC = () => {
               {sidebarVisible ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
             </IconButton>
             <List>
-              <ListItem button component={Link} to="/">
+              <ListItemButton component={Link} to="/">
                 <HomeIcon />
-              </ListItem>
-              <ListItem button component={Link} to="/pomodoro">
+              </ListItemButton>
+              <ListItemButton component={Link} to="/pomodoro">
                 <ListItemText primary={sidebarVisible ? "Pomodoro" : "P"} />
-              </ListItem>
-              <ListItem button component={Link} to="/matrix">
+              </ListItemButton>
+              <ListItemButton component={Link} to="/matrix">
                 <ListItemText primary={sidebarVisible ? "Matrix" : "M"} />
-              </ListItem>
-              <ListItem button component={Link} to="/stats">
+              </ListItemButton>
+              <ListItemButton component={Link} to="/stats">
                 <ListItemText primary={sidebarVisible ? "Stats" : "S"} />
-              </ListItem>
+              </ListItemButton>
             </List>
           </Drawer>
           <main className="App-content">
