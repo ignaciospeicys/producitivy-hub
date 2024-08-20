@@ -23,6 +23,8 @@ import Welcome from './components/Welcome';
 const App: React.FC = () => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
 
+    const minTomato = require('./assets/min_tomato.png');
+
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
     };
@@ -41,8 +43,8 @@ const App: React.FC = () => {
                     <AppBar
                         position="static"
                         sx={{
-                            width: sidebarVisible ? `calc(100% - 240px)` : `calc(100% - 60px)`,
-                            marginLeft: sidebarVisible ? `240px` : `60px`,
+                            width: sidebarVisible ? `calc(100% - 180px)` : `calc(100% - 60px)`,
+                            marginLeft: sidebarVisible ? `180px` : `60px`,
                             transition: 'width 0.3s ease, margin-left 0.3s ease',
                             bgcolor: '#fff2f2',
                             color: 'black'
@@ -58,11 +60,11 @@ const App: React.FC = () => {
                         variant="permanent"
                         open={sidebarVisible}
                         sx={{
-                            width: sidebarVisible ? 240 : 60,
+                            width: sidebarVisible ? 180 : 60,
                             transition: 'width 0.3s ease',
                             position: 'fixed',
                             '& .MuiDrawer-paper': {
-                                width: sidebarVisible ? 240 : 60,
+                                width: sidebarVisible ? 180 : 60,
                                 transition: 'width 0.3s ease',
                                 backgroundColor: '#fff2f2'
                             },
@@ -88,7 +90,14 @@ const App: React.FC = () => {
                                 <HomeIcon/>
                             </ListItemButton>
                             <ListItemButton component={Link} to="/pomodoro">
-                                <ListItemText primary={sidebarVisible ? 'Pomodoro' : 'P'}/>
+                                {sidebarVisible ? (
+                                    <>
+                                        <img src={minTomato} alt="Pomodoro" style={{width: '24px', height: '24px', marginRight: '5px'}}/>
+                                        <ListItemText primary="Pomodoro"/>
+                                    </>
+                                ) : (
+                                    <img src={minTomato} alt="Pomodoro" style={{width: '24px', height: '24px' }} />
+                                )}
                             </ListItemButton>
                             <ListItemButton component={Link} to="/matrix">
                                 <ListItemText primary={sidebarVisible ? 'Matrix' : 'M'}/>
@@ -101,7 +110,7 @@ const App: React.FC = () => {
                     <main
                         className="App-content"
                         style={{
-                            marginLeft: sidebarVisible ? 240 : 60,
+                            marginLeft: sidebarVisible ? 180 : 60,
                             transition: 'margin-left 0.3s ease',
                             padding: '16px',
                         }}
