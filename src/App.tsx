@@ -68,10 +68,16 @@ const App: React.FC = () => {
                             },
                         }}
                     >
-                        <List>
+                        <List
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
+                        >
                             <ListItemButton onClick={toggleSidebar}>
                                 <IconButton
-                                    edge="start"
                                     color="inherit"
                                     aria-label="menu"
                                 >
