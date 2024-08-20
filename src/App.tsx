@@ -49,14 +49,6 @@ const App: React.FC = () => {
                         }}
                     >
                         <Toolbar>
-                            <IconButton
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                onClick={toggleSidebar}
-                            >
-                                <MenuIcon/>
-                            </IconButton>
                             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                                 Productivity Hub
                             </Typography>
@@ -77,16 +69,25 @@ const App: React.FC = () => {
                         }}
                     >
                         <List>
-                            <ListItemButton component={Link} to="/" onClick={toggleSidebar}>
+                            <ListItemButton onClick={toggleSidebar}>
+                                <IconButton
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                >
+                                    <MenuIcon/>
+                                </IconButton>
+                            </ListItemButton>
+                            <ListItemButton component={Link} to="/">
                                 <HomeIcon/>
                             </ListItemButton>
-                            <ListItemButton component={Link} to="/pomodoro" onClick={toggleSidebar}>
+                            <ListItemButton component={Link} to="/pomodoro">
                                 <ListItemText primary={sidebarVisible ? 'Pomodoro' : 'P'}/>
                             </ListItemButton>
-                            <ListItemButton component={Link} to="/matrix" onClick={toggleSidebar}>
+                            <ListItemButton component={Link} to="/matrix">
                                 <ListItemText primary={sidebarVisible ? 'Matrix' : 'M'}/>
                             </ListItemButton>
-                            <ListItemButton component={Link} to="/stats" onClick={toggleSidebar}>
+                            <ListItemButton component={Link} to="/stats">
                                 <ListItemText primary={sidebarVisible ? 'Stats' : 'S'}/>
                             </ListItemButton>
                         </List>
