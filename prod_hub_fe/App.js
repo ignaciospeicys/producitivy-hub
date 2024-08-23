@@ -5,16 +5,9 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '
 import { StyleSheet, Text, View } from 'react-native';
 import PomodoroTimer from './components/PomodoroTimer';
 import Board from './components/Board';
+import Matrix from './components/Matrix';
 
 const Drawer = createDrawerNavigator();
-
-function Matrix() {
-  return (
-    <View style={styles.container}>
-      <Text>Matrix</Text>
-    </View>
-  );
-}
 
 function Theory() {
   return (
