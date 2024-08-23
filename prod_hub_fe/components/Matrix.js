@@ -40,10 +40,10 @@ const Matrix = () => {
   };
 
   const handleAddTask = () => {
-    if (newTaskTitle.trim() === '') return; // Avoid adding empty tasks
+    if (newTaskTitle.trim() === '') return;
 
     const newTask = {
-      id: (tasks.length + 1).toString(), // Simple unique ID generator
+      id: (tasks.length + 1).toString(),
       title: newTaskTitle,
     };
 
