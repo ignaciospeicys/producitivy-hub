@@ -18,12 +18,16 @@ import './App.css';
 import Pomodoro from './components/Pomodoro';
 import Matrix from './components/Matrix';
 import Stats from './components/Stats';
+import Board from './components/Board';
 import Welcome from './components/Welcome';
 
 const App: React.FC = () => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
 
     const minTomato = require('./assets/min_tomato.png');
+    const minMatrix = require('./assets/matrix_min.png');
+    const minBoard = require('./assets/board_min.png');
+    const minData = require('./assets/data_min.png');
 
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
@@ -87,7 +91,14 @@ const App: React.FC = () => {
                                 </IconButton>
                             </ListItemButton>
                             <ListItemButton component={Link} to="/">
-                                <HomeIcon/>
+                                {sidebarVisible ? (
+                                    <>
+                                        <HomeIcon style={{width: '24px', height: '24px', marginRight: '5px'}}/>
+                                        <ListItemText primary="Home" />
+                                    </>
+                                ) : (
+                                    <HomeIcon />
+                                )}
                             </ListItemButton>
                             <ListItemButton component={Link} to="/pomodoro">
                                 {sidebarVisible ? (
@@ -100,10 +111,34 @@ const App: React.FC = () => {
                                 )}
                             </ListItemButton>
                             <ListItemButton component={Link} to="/matrix">
-                                <ListItemText primary={sidebarVisible ? 'Matrix' : 'M'}/>
+                                {sidebarVisible ? (
+                                    <>
+                                        <img src={minMatrix} alt="Matrix" style={{width: '24px', height: '24px', marginRight: '5px'}}/>
+                                        <ListItemText primary="Matrix"/>
+                                    </>
+                                ) : (
+                                    <img src={minMatrix} alt="Matrix" style={{width: '24px', height: '24px' }} />
+                                )}
+                            </ListItemButton>
+                            <ListItemButton component={Link} to="/board">
+                                {sidebarVisible ? (
+                                    <>
+                                        <img src={minBoard} alt="Board" style={{width: '24px', height: '24px', marginRight: '5px'}}/>
+                                        <ListItemText primary="Board"/>
+                                    </>
+                                ) : (
+                                    <img src={minBoard} alt="Board" style={{width: '24px', height: '24px' }} />
+                                )}
                             </ListItemButton>
                             <ListItemButton component={Link} to="/stats">
-                                <ListItemText primary={sidebarVisible ? 'Stats' : 'S'}/>
+                                {sidebarVisible ? (
+                                    <>
+                                        <img src={minData} alt="Stats" style={{width: '24px', height: '24px', marginRight: '5px'}}/>
+                                        <ListItemText primary="Stats"/>
+                                    </>
+                                ) : (
+                                    <img src={minData} alt="Stats" style={{width: '24px', height: '24px' }} />
+                                )}
                             </ListItemButton>
                         </List>
                     </Drawer>
@@ -118,6 +153,7 @@ const App: React.FC = () => {
                         <Routes>
                             <Route path="/pomodoro" element={<Pomodoro/>}/>
                             <Route path="/matrix" element={<Matrix/>}/>
+                            <Route path="/board" element={<Board/>}/>
                             <Route path="/stats" element={<Stats/>}/>
                             <Route path="/" element={<Welcome/>}/>
                         </Routes>
